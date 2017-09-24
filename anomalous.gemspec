@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Alex Miller"]
   spec.email         = ["apmiller108@yahoo.com"]
 
-  spec.summary       = %q{TODO: Anomaly detection}
-  spec.description   = %q{TODO: Detect anomalous examples from the density function a dataset.}
-  spec.homepage      = "TODO: https://github.com/apmiller108/anomalous"
+  spec.summary       = %q{Anomaly detection}
+  spec.description   = %q{Detect anomalous examples from the density function a dataset.}
+  spec.homepage      = "https://github.com/apmiller108/anomalous"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
