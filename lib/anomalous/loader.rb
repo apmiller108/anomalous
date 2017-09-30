@@ -1,16 +1,16 @@
 module Anomalous
   class Loader
     attr_reader :matrix
-    SUPPORTED_DATA_FORMATS = %w{array harwell_boeing matlab market point_cloud}
+    SUPPORTED_DATA_FORMATS = %i{array harwell_boeing matlab market point_cloud}.freeze
 
-    def initialize(data, options)
-      @data_format = options[:data_format]
-      @matrix = convert_to_nmatrix data
+    def initialize(data, data_format = :array)
+      @data_format = data_format
+      @matrix = initialize_nmatrix data
     end
 
     private
 
-    def convert_to_nmatrix(data)
+    def initialize_nmatrix(data)
       case @data_format
       when :array
         N[*data]
@@ -23,7 +23,9 @@ module Anomalous
       when :point_cloud
         NMatrix::IO::PointCloud.load(data)
       else
-        raise "Data format should be one of #{SUPPORTED_DATA_FORMATS}"
+        raise AnomalousError,
+              "Data format: '#{@data_format}' is not supported. Data format "\
+              "should be one of #{SUPPORTED_DATA_FORMATS}"
       end
     end
   end
