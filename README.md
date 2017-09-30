@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/apmiller108/anomalous.svg?branch=master)](https://travis-ci.org/apmiller108/anomalous)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3f6a313902294713a7c56cf7dbcbfcc0)](https://www.codacy.com/app/apmiller108/anomalous?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=apmiller108/anomalous&amp;utm_campaign=Badge_Grade)
 
 # Anomalous
 
