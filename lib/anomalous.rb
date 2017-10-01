@@ -1,6 +1,7 @@
 require 'anomalous/detector'
 require 'anomalous/gaussian_dist_params_estimate'
 require 'anomalous/loader'
+require 'anomalous/plot'
 require 'anomalous/version'
 require 'nmatrix'
 
