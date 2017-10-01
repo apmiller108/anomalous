@@ -3,11 +3,11 @@ require 'nyaplot'
 module Anomalous
   module Plot
     class Histogram
-      def initialize(features, ith_feature: :all, dir: 'histograms')
-        @ith_feature = ith_feature
+      def initialize(features, options = {})
+        @ith_feature = options[:ith_feature] || :all
+        @dir         = options[:dir] || 'histograms'
         @features    = filter_feature_set(features)
         @plot        = Nyaplot::Plot.new
-        @dir         = dir
       end
 
       def call
@@ -16,6 +16,7 @@ module Anomalous
           Dir.mkdir(@dir) unless File.exists?(@dir)
           @plot.export_html(histogram_file_path(index))
         end
+        true
       end
 
       private
