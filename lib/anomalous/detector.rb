@@ -2,7 +2,7 @@ module Anomalous
   class Detector
     extend Forwardable
 
-    def_delegator :@loader, :examples, :labels
+    def_delegators :@loader, :examples, :labels
 
     def initialize(loader:)
       @loader = loader
@@ -10,6 +10,10 @@ module Anomalous
 
     def gaussian_params
       @gaussian_params ||= GaussianDistParamsEstimate.estimate_for examples
+    end
+
+    def render_histogram(**args)
+      Plot::Histogram.new(examples, args).call
     end
   end
 end

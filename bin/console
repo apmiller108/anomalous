@@ -10,5 +10,11 @@ require "anomalous"
 # require "pry"
 # Pry.start
 
+def test_mat
+  Anomalous.load('spec/sample_data/data.mat',
+                 'spec/sample_data/labels.mat',
+                 data_format: :matlab)
+end
+
 require "irb"
 IRB.start(__FILE__)

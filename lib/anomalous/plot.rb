@@ -1,0 +1,1 @@
+require 'anomalous/plot/histogram'

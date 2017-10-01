@@ -3,8 +3,8 @@ module Anomalous
     SUPPORTED_DATA_FORMATS = %i{array harwell_boeing matlab market point_cloud}.freeze
     attr_reader :examples, :labels
 
-    def initialize(examples, labels, data_format = :array)
-      @data_format = data_format
+    def initialize(examples, labels, options = {})
+      @data_format = options.fetch(:data_format, :array)
       @examples    = initialize_nmatrix examples
       @labels      = initialize_nmatrix labels
     end
