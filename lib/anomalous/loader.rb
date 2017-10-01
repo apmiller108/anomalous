@@ -1,5 +1,3 @@
-require 'nmatrix'
-
 module Anomalous
   class Loader
     SUPPORTED_DATA_FORMATS = %i{array harwell_boeing matlab market point_cloud}.freeze

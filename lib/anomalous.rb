@@ -2,6 +2,7 @@ require 'anomalous/detector'
 require 'anomalous/gaussian_dist_params_estimate'
 require 'anomalous/loader'
 require 'anomalous/version'
+require 'nmatrix'
 
 module Anomalous
   def self.load(data, labels, **args)
