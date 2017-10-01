@@ -1,11 +1,11 @@
-require 'anomalous/version'
-require 'anomalous/loader'
 require 'anomalous/detector'
-require 'nmatrix'
+require 'anomalous/gaussian_dist_params_estimate'
+require 'anomalous/loader'
+require 'anomalous/version'
 
 module Anomalous
-  def self.load(data, **args)
-    Detector.new(loader: Loader.new(data, args[:data_format]))
+  def self.load(data, labels, **args)
+    Detector.new(loader: Loader.new(data, labels, args[:data_format]))
   end
 
   class AnomalousError < StandardError; end
