@@ -1,12 +1,11 @@
 module Anomalous
   class Loader
     SUPPORTED_DATA_FORMATS = %i{array harwell_boeing matlab market point_cloud}.freeze
-    attr_reader :examples, :labels
+    attr_reader :examples
 
-    def initialize(examples, labels, options = {})
+    def initialize(examples, options = {})
       @data_format = options.fetch(:data_format, :array)
       @examples    = initialize_nmatrix examples
-      @labels      = initialize_nmatrix labels
     end
 
     private

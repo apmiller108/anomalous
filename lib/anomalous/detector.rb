@@ -12,6 +12,9 @@ module Anomalous
       @gaussian_params ||= GaussianDistParamsEstimate.estimate_for examples
     end
 
+    def probability_val
+    end
+
     def render_histogram(**args)
       Plot::Histogram.new(examples, args).call
     end
