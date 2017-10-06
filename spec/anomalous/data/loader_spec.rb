@@ -77,4 +77,30 @@ RSpec.describe Anomalous::Data::Loader do
       end
     end
   end
+
+  describe 'delegation' do
+    let(:loader) { described_class.new([[1], [2]]) }
+
+    subject do
+      loader.instance_variable_get(:@data_set)
+    end
+
+    it 'delegates :training_set to :@dataset' do
+      expect(subject).to receive(:training_set)
+
+      loader.training_set
+    end
+
+    it 'delegates :test_set to :@dataset' do
+      expect(subject).to receive(:test_set)
+
+      loader.test_set
+    end
+
+    it 'delegates :cross_val_set to :@dataset' do
+      expect(subject).to receive(:cross_val_set)
+
+      loader.cross_val_set
+    end
+  end
 end
