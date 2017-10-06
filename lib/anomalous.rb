@@ -6,8 +6,8 @@ require 'anomalous/version'
 require 'nmatrix'
 
 module Anomalous
-  def self.load(data, labels, **args)
-    Detector.new(loader: Loader.new(data, labels, args))
+  def self.load(examples, **args)
+    Detector.new(loader: Loader.new(examples, args))
   end
 
   class AnomalousError < StandardError; end

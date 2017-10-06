@@ -7,8 +7,8 @@ module Anomalous
     attr_reader :mean, :variance
 
     def initialize(mean, variance)
-      @mean     = mean
-      @variance = variance
+      @mean     = mean[0..-2]
+      @variance = variance[0..-2]
     end
   end
 end
