@@ -1,10 +1,7 @@
 module Anomalous
   class GaussianDistParamsEstimate
     def self.estimate_for(examples)
-      non_anomalous = N[
-        *examples.to_a.delete_if { |example| example.last == 1 }
-      ]
-      new non_anomalous.mean, non_anomalous.variance
+      new examples.mean, examples.variance
     end
 
     attr_reader :mean, :variance
