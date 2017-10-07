@@ -13,12 +13,10 @@ module Anomalous
     end
 
     def gaussian_params
-      # @gaussian_params ||= GaussianDistParamsEstimate.estimate_for training_set
-      @gaussian_params ||= GaussianDistParamsEstimate.estimate_for examples
+      @gaussian_params ||= GaussianDistParamsEstimate.call examples
     end
 
     def probability_density_cross_val
-      # Anomalous::ProbabilityDensity.call cross_val_set, gaussian_params
       Anomalous::ProbabilityDensity.call examples, gaussian_params
     end
 

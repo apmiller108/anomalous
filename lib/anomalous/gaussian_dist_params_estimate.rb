@@ -4,7 +4,7 @@ module Anomalous
 
     attr_reader :mean, :variance
 
-    def self.estimate_for(examples)
+    def self.call(examples)
       new examples.mean, examples.variance
     end
 
