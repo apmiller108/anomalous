@@ -5,9 +5,9 @@ RSpec.describe Anomalous::GaussianDistParamsEstimate do
     N[[1, 2, 3, 0], [5, 6, 7, 0]]
   end
 
-  describe '.estimate_for' do
+  describe '.call' do
     subject do
-      described_class.estimate_for(examples)
+      described_class.call(examples)
     end
 
     it 'returns an instance of GaussianDistParamsEstimate' do
@@ -27,7 +27,7 @@ RSpec.describe Anomalous::GaussianDistParamsEstimate do
     end
 
     it 'calculates the variance' do
-      expect(subject.variance.to_a).to eq [8.0, 8.0, 8.0]
+      expect(subject.variance.to_a).to eq [4.0, 4.0, 4.0]
     end
   end
 end

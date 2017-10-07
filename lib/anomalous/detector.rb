@@ -3,20 +3,21 @@ module Anomalous
     extend Forwardable
 
     def_delegators(:@loader,
+                   :cross_val_set,
                    :examples,
-                   :training_set,
-                   :anomalous_examples,
-                   :cross_val_set)
+                   :test_set,
+                   :training_set)
 
     def initialize(loader:)
       @loader = loader
     end
 
     def gaussian_params
-      @gaussian_params ||= GaussianDistParamsEstimate.estimate_for training_set
+      @gaussian_params ||= GaussianDistParamsEstimate.call examples
     end
 
-    def probability_val
+    def probability_density_cross_val
+      Anomalous::ProbabilityDensity.call examples, gaussian_params
     end
 
     def render_histogram(**args)
