@@ -1,10 +1,12 @@
 module Anomalous
   class GaussianDistParamsEstimate
+    using Anomalous::NMatrixExtensions
+
+    attr_reader :mean, :variance
+
     def self.estimate_for(examples)
       new examples.mean, examples.variance
     end
-
-    attr_reader :mean, :variance
 
     def initialize(mean, variance)
       @mean     = mean[0..-2]
