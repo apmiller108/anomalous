@@ -2,9 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Anomalous::ProbabilityDensity do
   let(:data) { NMatrix::IO::Matlab.load 'spec/sample_data/sample2.mat' }
-  let :gaussian_params do
-    Anomalous::GaussianDistParamsEstimate.call(data)
-  end
+  let(:gaussian_params) { Anomalous::GaussianDistParamsEstimate.call(data) }
 
   subject do
     described_class.call data, gaussian_params
