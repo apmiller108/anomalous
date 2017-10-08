@@ -1,17 +1,16 @@
 module Anomalous
   class ProbabilityDensity
     def self.call(examples, gaussian_params)
-      k = gaussian_params.mean.size
+      k = gaussian_params.mean.cols
       m = examples.rows
+      examples = examples.slice(0..(m - 1), 0..(k - 1))
 
       sigma2 =
-        if gaussian_params.variance.cols == 1 || gaussian_params.variance.rows == 1
+        if gaussian_params.variance.effective_dim == 1
           NMatrix.diag(gaussian_params.variance.to_a)
         else
           gaussian_params.variance
         end
-
-      examples = examples.slice(0..(m - 1), 0..(k - 1))
 
       examples.each_row.with_index do |row, index|
         examples[index, 0..(k - 1)] = row - gaussian_params.mean
