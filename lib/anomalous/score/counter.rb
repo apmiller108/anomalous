@@ -10,6 +10,7 @@ module Anomalous
         @y_labels        = y_labels
         @probabilities   = probabilities
         @epsilon         = epsilon
+        compute_counts
       end
 
       def compute_counts
@@ -22,7 +23,6 @@ module Anomalous
             @false_neg_count += 1
           end
         end
-        self
       end
     end
   end
