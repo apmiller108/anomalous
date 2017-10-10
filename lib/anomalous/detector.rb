@@ -17,7 +17,7 @@ module Anomalous
     end
 
     def probability_density_cross_val
-      Anomalous::ProbabilityDensity.call examples, gaussian_params
+      Anomalous::ProbabilityDensity.call cross_val_set, gaussian_params
     end
 
     def render_histogram(**args)
