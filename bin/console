@@ -10,7 +10,11 @@ require "anomalous"
 # require "pry"
 # Pry.start
 
-def test_mat
+def sample1
+  Anomalous.load('spec/sample_data/sample.mat', data_format: :matlab)
+end
+
+def data1
   Anomalous.load('spec/sample_data/data.mat', data_format: :matlab)
 end
 
