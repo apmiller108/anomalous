@@ -18,5 +18,18 @@ def data1
   Anomalous.load('spec/sample_data/data.mat', data_format: :matlab)
 end
 
+def test_case
+  examples = NMatrix::IO::Matlab.load('spec/sample_data/test_case/examples.mat')
+  xval     = NMatrix::IO::Matlab.load('spec/sample_data/test_case/xval.mat')
+
+  gaussian_params = Anomalous::GaussianDistParamsEstimate.call(examples)
+
+  p_examples = Anomalous::ProbabilityDensity.call(examples, gaussian_params)
+  p_xval     = Anomalous::ProbabilityDensity.call(xval, gaussian_params)
+
+  epsilon = Anomalous::Epsilon.new(xval, p_xval)
+  require 'pry'; binding.pry
+end
+
 require "irb"
 IRB.start(__FILE__)
