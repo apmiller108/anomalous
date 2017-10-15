@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe Anomalous::Score::Scoring do
-  let(:examples) { N[[1, 1], [2, 1], [3, 0]] }
-  let(:probabilities) { N[[1], [2], [3]] }
+  let(:y_labels) { N[[1], [1], [0]] }
+  let(:pval) { N[[1], [2], [3]] }
   let(:epsilon) { 1.1 }
 
   subject do
-    described_class.new(examples, probabilities, epsilon)
+    described_class.new(y_labels, pval, epsilon)
   end
 
   it 'calculates the precision' do

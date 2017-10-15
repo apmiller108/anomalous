@@ -13,11 +13,15 @@ module Anomalous
     end
 
     def gaussian_params
-      @gaussian_params ||= GaussianDistParamsEstimate.call examples
+      @gaussian_params ||= GaussianDistParamsEstimate.call training_set
     end
 
     def probability_density_cross_val
       Anomalous::ProbabilityDensity.call cross_val_set, gaussian_params
+    end
+
+    def find_threshold
+      Anomalous::Epsilon.new(cross_val_set, probability_density_cross_val)
     end
 
     def render_histogram(**args)

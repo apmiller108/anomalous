@@ -3,10 +3,9 @@ module Anomalous
     class Scoring
       attr_reader :counter
 
-      def initialize(examples, probabilities, epsilon)
-        @y_labels = examples[0..(examples.rows - 1), examples.cols - 1]
-        @counter = Anomalous::Score::Counter.new(@y_labels,
-                                                 probabilities,
+      def initialize(y_labels, pval, epsilon)
+        @counter = Anomalous::Score::Counter.new(y_labels,
+                                                 pval,
                                                  epsilon)
       end
 
