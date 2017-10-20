@@ -9,7 +9,7 @@ module Anomalous
       def initialize(examples, options = {})
         @data_format = options.fetch(:data_format, :array)
         @examples    = initialize_nmatrix examples
-        @data_set    = Anomalous::Data::Set.new(@examples)
+        @data_set    = Anomalous::Data::Set.new(examples: @examples)
       end
 
       private
