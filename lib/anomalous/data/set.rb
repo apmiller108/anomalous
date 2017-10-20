@@ -3,23 +3,33 @@ module Anomalous
     class Set
       attr_reader :training_set, :test_set, :cross_val_set
 
-      def initialize(examples)
-        @training_set, @test_set, @cross_val_set = build_datasets(examples)
+      def initialize(examples:, split: 0.8)
+        @split = split
+        build_datasets(examples)
       end
 
       def build_datasets(examples)
         partitioned = examples.to_a.partition { |example| example.last.zero? }
-        build_nmatrices(*partitioned, 0.8)
+        @training_set, @cross_val_set, @test_set = build_nmatrices(*partitioned)
       end
 
-      def build_nmatrices(normal, outliers, percent)
-        normal_split  = (normal.size * percent).round
-        outlier_split = (outliers.size * percent).round
+      private
+
+      def build_nmatrices(normal, outliers)
+        split_index          = (normal.size * @split).round
+        normal_training      = normal[0..(split_index - 1)]
+        normal_partitioned   = halve_set(normal[split_index..-1])
+        outliers_partitioned = halve_set(outliers)
+
         [
-          normal,
-          normal[0..(normal_split - 1)].concat(outliers[0..(outlier_split - 1)]),
-          normal[normal_split..-1].concat(outliers[outlier_split..-1])
+          normal_training,
+          normal_partitioned[0].concat(outliers_partitioned[0]),
+          normal_partitioned[1].concat(outliers_partitioned[1])
         ].map { |array| N[*array] }
+      end
+
+      def halve_set(examples)
+        examples.partition.with_index { |_, index| index < examples.size / 2 }
       end
     end
   end
