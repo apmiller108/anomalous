@@ -18,17 +18,17 @@ module Anomalous
     private
 
     def by_f1_score_desc(x, y)
-      x[1] <=> y[1]
+      x[1][:f1] <=> y[1][:f1]
     end
 
     def f1_is_nan?(array)
-      array[1].nan?
+      array[1][:f1].nan?
     end
 
     def collect_scores(epsilon, array)
       array << [
         epsilon,
-        Anomalous::Score::Scoring.new(@y_labels, @prob, epsilon).f1
+        Anomalous::Score::Scoring.new(@y_labels, @prob, epsilon).scores
       ]
     end
 

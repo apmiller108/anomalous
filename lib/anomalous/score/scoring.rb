@@ -9,6 +9,14 @@ module Anomalous
                                                  epsilon)
       end
 
+      def scores
+        {
+          f1: f1,
+          precision: precision,
+          recall: recall
+        }
+      end
+
       def precision
         counter.true_pos_count /
           (counter.true_pos_count + counter.false_pos_count)
