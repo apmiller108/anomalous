@@ -22,17 +22,18 @@ RSpec.describe Anomalous do
       Anomalous::ProbabilityDensity.call(xval, gaussian_params)
     end
 
-    it 'finds the correct threshold and f1 score' do
-      epsilon = Anomalous::Epsilon.new(xval, p_xval)
-
-      expect(epsilon.select_threshold).to eq [
-                                            1.3772288907613558e-18,
-                                            0.6153846153846154
-                                          ]
+    subject do
+      Anomalous::Epsilon.new(xval, p_xval)
     end
 
-    xit 'detects anomalies' do
-      # p_examples = Anomalous::ProbabilityDensity.call(examples, gaussian_params)
+    it 'finds the correct threshold' do
+      expect(subject.select_threshold[0]).to eq 1.3772288907613558e-18
+    end
+
+    it 'returns the f1, precision, and recall scores as a hash' do
+      expect(subject.select_threshold[1]).to eq f1: 0.6153846153846154,
+                                                precision: 0.5,
+                                                recall: 0.8
     end
   end
 end
