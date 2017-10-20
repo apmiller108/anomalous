@@ -5,16 +5,18 @@ module Anomalous
     class Histogram
       def initialize(features, options = {})
         @ith_feature = options[:ith_feature] || :all
-        @dir         = options[:dir] || 'histograms'
+        @dir         = options[:dir]         || 'histograms'
+        @bins        = options[:bins]        || 100
         @features    = filter_feature_set(features)
-        @plot        = Nyaplot::Plot.new
       end
 
       def call
         @features.each_column.with_index do |column, index|
-          @plot.add(:histogram, column.to_flat_array)
+          plot = Nyaplot::Plot.new
+          plot.add(:histogram, column.to_flat_array)
+          plot.diagrams[0].options[:bin_num] = @bins
           Dir.mkdir(@dir) unless File.exists?(@dir)
-          @plot.export_html(histogram_file_path(index))
+          plot.export_html(histogram_file_path(index))
         end
         true
       end
