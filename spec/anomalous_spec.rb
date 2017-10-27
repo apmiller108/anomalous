@@ -18,10 +18,6 @@ RSpec.describe Anomalous do
       NMatrix::IO::Matlab.load('spec/sample_data/test_case/xval.mat')
     end
 
-    # let :p_xval do
-    #   Anomalous::ProbabilityDensity.call(xval, gaussian_params)
-    # end
-
     subject do
       Anomalous::Epsilon.new(xval, gaussian_params)
     end

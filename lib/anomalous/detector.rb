@@ -13,7 +13,7 @@ module Anomalous
     end
 
     def predict(examples = test_set)
-      # TODO: make prediction for new examples
+      Anomalous::Prediction.new(examples, threshold[0], gaussian_params)
     end
 
     def threshold
