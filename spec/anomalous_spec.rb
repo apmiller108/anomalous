@@ -18,20 +18,20 @@ RSpec.describe Anomalous do
       NMatrix::IO::Matlab.load('spec/sample_data/test_case/xval.mat')
     end
 
-    let :p_xval do
-      Anomalous::ProbabilityDensity.call(xval, gaussian_params)
-    end
+    # let :p_xval do
+    #   Anomalous::ProbabilityDensity.call(xval, gaussian_params)
+    # end
 
     subject do
-      Anomalous::Epsilon.new(xval, p_xval)
+      Anomalous::Epsilon.new(xval, gaussian_params)
     end
 
     it 'finds the correct threshold' do
-      expect(subject.select_threshold[0]).to eq 1.3772288907613558e-18
+      expect(subject.threshold[0]).to eq 1.3772288907613558e-18
     end
 
     it 'returns the f1, precision, and recall scores as a hash' do
-      expect(subject.select_threshold[1]).to eq f1: 0.6153846153846154,
+      expect(subject.threshold[1]).to eq f1: 0.6153846153846154,
                                                 precision: 0.5,
                                                 recall: 0.8
     end

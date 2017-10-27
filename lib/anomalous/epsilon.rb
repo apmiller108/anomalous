@@ -1,11 +1,11 @@
 module Anomalous
   class Epsilon
-    def initialize(examples, probabilities)
+    def initialize(examples, gaussian_params)
       @y_labels = extract_lables(examples)
-      @prob     = probabilities
+      @prob     = Anomalous::ProbabilityDensity.call examples, gaussian_params
     end
 
-    def select_threshold
+    def threshold
       flat_array
         .min
         .step(to: flat_array.max, by: step_size)
