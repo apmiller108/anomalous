@@ -7,11 +7,15 @@ module Anomalous
     end
 
     def call
-      prob = Anomalous::ProbabilityDensity.call(@examples, @gaussian_params)
-
-      prob.each_with_indices do |p, i|
-        puts i if p < @epsilon
+      probabilities.each_with_indices.with_object([]) do |(prob, index), array|
+        array << index if prob < @epsilon
       end
+    end
+
+    private
+
+    def probabilities
+      Anomalous::ProbabilityDensity.call(@examples, @gaussian_params)
     end
   end
 end
